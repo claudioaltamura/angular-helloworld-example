@@ -1,14 +1,29 @@
+dist: trusty
 language: node_js
 node_js:
   - "node"
-dist: trusty
 sudo: required
+os:
+  - linux
 branches:
   only:
   - master
 before_script:
   - npm install -g @angular/cli
+env:
+  global:
+    - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    - DISPLAY=:99.0
+    - CHROME_BIN=chromium-browser
+before_script:
+  - sh -e /etc/init.d/xvfb start
+install:
+  - yarn
 script:
-  - ng lint
-  - npm run test-headless
-  - ng build
+  - yarn run lint
+  - yarn run test -- --watch=false
+  - yarn run pree2e
+  - yarn run e2e
+cache: yarn
+
+
