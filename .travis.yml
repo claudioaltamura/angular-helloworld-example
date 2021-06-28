@@ -5,11 +5,6 @@ node_js:
 sudo: required
 os:
   - linux
-branches:
-  only:
-  - master
-before_script:
-  - npm install -g @angular/cli
 env:
   global:
     - DBUS_SESSION_BUS_ADDRESS=/dev/null
